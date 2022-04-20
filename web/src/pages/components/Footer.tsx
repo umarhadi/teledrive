@@ -2,8 +2,6 @@ import { GithubOutlined, TwitterOutlined } from '@ant-design/icons'
 import { Button, Col, Divider, Layout, Row, Space, Typography } from 'antd'
 import React from 'react'
 import { useThemeSwitcher } from 'react-css-theme-switcher'
-import { DiscordIcon } from './Discord'
-
 interface Props {
   me?: any
 }
@@ -42,9 +40,8 @@ const Footer: React.FC<Props> = () => {
             <Col md={8} sm={12} span={24} style={{ marginBottom: '30px' }}>
               <Typography.Title level={5}>Social Media</Typography.Title>
               <Space direction="horizontal">
-                <Button type="link" size="small" href="https://github.com/mgilangjanuar/teledrive" target="_blank" icon={<GithubOutlined />}>GitHub</Button>
+                <Button type="link" size="small" href="https://github.com/umarhadi/teledrive" target="_blank" icon={<GithubOutlined />}>GitHub</Button>
                 <Button type="link" size="small" href="https://twitter.com/teledriveapp" target="_blank" icon={<TwitterOutlined />}>Twitter</Button>
-                <Button type="link" size="small" href="https://discord.gg/8v26KavKa4" target="_blank" icon={<DiscordIcon />}>Discord</Button>
               </Space>
             </Col>
           </Row>

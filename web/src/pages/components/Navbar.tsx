@@ -1,4 +1,4 @@
-import { DashboardOutlined, GithubOutlined, LoginOutlined, LogoutOutlined, MenuOutlined, SettingOutlined, UserOutlined, UserSwitchOutlined, WarningOutlined } from '@ant-design/icons'
+import { DashboardOutlined, LoginOutlined, LogoutOutlined, MenuOutlined, SettingOutlined, UserOutlined, UserSwitchOutlined, WarningOutlined } from '@ant-design/icons'
 import { Button, Checkbox, Form, Layout, Menu, Modal, Popover, Tag, Typography } from 'antd'
 import Avatar from 'antd/lib/avatar/avatar'
 import React, { useState } from 'react'
@@ -67,8 +67,8 @@ const Navbar: React.FC<Props> = ({ user }) => {
         {/* <Menu.Item onClick={() => history.push('/privacy')} key="privacy">Privacy Policy</Menu.Item> */}
         {/* <Menu.Item onClick={() => history.push('/terms')} key="terms">Terms</Menu.Item> */}
         {/* <Menu.Item onClick={() => history.push('/refund')} key="refund">Refund Policy</Menu.Item> */}
-        {/* <Menu.Item onClick={() => window.open('https://mgilangjanuar.notion.site/TeleDrive-Blog-ea8c422dfa8046cda6655cddec0cd8e8', '_blank')} key="blog">Blog</Menu.Item> */}
-        <Menu.Item onClick={() => window.open('https://github.com/mgilangjanuar/teledrive', '_blank')} key="github" icon={<GithubOutlined />}>GitHub</Menu.Item>
+        <Menu.Item onClick={() => window.open('https://umarhadi.dev', '_blank')} key="blog">umarhadi.dev</Menu.Item>
+        {/* <Menu.Item onClick={() => window.open('https://github.com/mgilangjanuar/teledrive', '_blank')} key="github" icon={<GithubOutlined />}>GitHub</Menu.Item> */}
       </Menu>
     </Layout.Header>
 
