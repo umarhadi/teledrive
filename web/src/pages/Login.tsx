@@ -13,7 +13,7 @@ import useSWRImmutable from 'swr/immutable'
 import { Api } from 'teledrive-client'
 import { generateRandomBytes } from 'teledrive-client/Helpers'
 import { computeCheck } from 'teledrive-client/Password'
-import en from 'world_countries_lists/data/en/world.json'
+import en from 'world_countries_lists/data/countries/en/world.json'
 import { fetcher, req } from '../utils/Fetcher'
 import { anonymousTelegramClient, telegramClient } from '../utils/Telegram'
 
@@ -57,13 +57,13 @@ const Login: React.FC<Props> = ({ me }) => {
       if (localStorage.getItem('experimental')) {
         const client = await anonymousTelegramClient.connect()
         if (phoneCodeHash) {
-          const { phoneCodeHash: newPhoneCodeHash } = await client.invoke(new Api.auth.ResendCode({
+          const { phoneCodeHash: newPhoneCodeHash, timeout } = await client.invoke(new Api.auth.ResendCode({
             phoneNumber, phoneCodeHash }))
           const session = client.session.save() as any
           localStorage.setItem('session', session)
-          data = { phoneCodeHash: newPhoneCodeHash }
+          data = { phoneCodeHash: newPhoneCodeHash, timeout }
         } else {
-          const { phoneCodeHash } = await client.invoke(new Api.auth.SendCode({
+          const { phoneCodeHash, timeout } = await client.invoke(new Api.auth.SendCode({
             apiId: Number(process.env.REACT_APP_TG_API_ID),
             apiHash: process.env.REACT_APP_TG_API_HASH,
             phoneNumber,
@@ -75,7 +75,7 @@ const Login: React.FC<Props> = ({ me }) => {
           }))
           const session = client.session.save() as any
           localStorage.setItem('session', session)
-          data = { phoneCodeHash }
+          data = { phoneCodeHash, timeout }
         }
       } else {
         const invitationCode = location.search.replace('?code=', '')
@@ -83,7 +83,7 @@ const Login: React.FC<Props> = ({ me }) => {
         data = resp.data
       }
       setPhoneCodeHash(data.phoneCodeHash)
-      setCountdown(170)
+      setCountdown(data.timeout)
       notification.info({
         message: 'Sent!',
         description: 'Please check your Telegram app and input the code'
@@ -497,7 +497,7 @@ const Login: React.FC<Props> = ({ me }) => {
                     <Typography.Paragraph type="secondary">
                       Authentication code sent to <b>+{phoneData.code}&bull;&bull;&bull;&bull;&bull;&bull;&bull;{phoneData.phone?.substring(phoneData.phone.length - 4)}</b>
                     </Typography.Paragraph>
-                    <OtpInput numInputs={5} value={otp} onChange={setOtp} isInputNum containerStyle={{ justifyContent: 'center' }} inputStyle={{
+                    <OtpInput numInputs={5} value={otp as string || ''} onChange={setOtp} isInputNum containerStyle={{ justifyContent: 'center' }} inputStyle={{
                       width: '2.7rem',
                       height: '2.7rem',
                       margin: '0 0.3rem 1rem 0',
